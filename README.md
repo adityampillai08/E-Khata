@@ -1,161 +1,170 @@
-# E-KHATA — Digital Khata for Kirana Stores
+# E-KHATA — Digital Credit Ledger for Kirana Stores
 
 **Trust captured in a snap.**
 
-A collaborative hackathon project that digitises traditional kirana-store credit ledgers through an accessible, intuitive, user-friendly digital experience.
+E-KHATA is a collaborative hackathon project that digitises the traditional *khata* system used by neighbourhood kirana stores. It provides a shopkeeper-facing dashboard and a customer-facing ledger experience for managing credit, tracking outstanding amounts, and recording transactions.
 
-🌐 **Live Demo:** [ekhata-gamma.vercel.app](https://ekhata-gamma.vercel.app/)  
-💻 **Team Project Repository:** [E-KHATA on GitHub](https://github.com/jemankalita/E-KHATA)
+🌐 **Live Demo:** [ekhata-gamma.vercel.app](https://ekhata-gamma.vercel.app/)
 
----
+💻 **Team Project Repository:** [jemankalita/E-KHATA](https://github.com/jemankalita/E-KHATA)
 
 ## Overview
 
-E-KHATA is a digital alternative to the traditional paper-based *khata* used by neighbourhood kirana stores to maintain customer credit records.
+Traditional kirana stores often track customer credit using handwritten notebooks. E-KHATA explores how this process can be digitised through a simpler, mobile-friendly interface that connects shopkeepers with their customers' khata records.
 
-The platform aims to make credit management more organised and transparent by allowing shopkeepers to record transactions digitally while enabling customers to access relevant bills, account balances, and transaction information.
+The application includes separate shopkeeper and customer experiences, a running credit ledger, bill-photo OCR, QR-based workflows, and a prototype RFID interaction flow.
 
-The project brings together digital ledger management, OCR-assisted bill processing, product barcode scanning, and QR-assisted customer workflows to reduce manual effort in everyday retail transactions.
+## Technical Highlights
+
+**E-KHATA is an interactive application, not simply a static collection of UI screens.** Its interface includes application state and ledger-related workflows that respond to user interactions.
+
+- **Dynamic ledger interface:** displays credit-related information such as outstanding balances, transaction details, and due dates.
+- **Running balance:** ledger information reflects the application's transaction workflow rather than treating every displayed amount as an unrelated UI element.
+- **Bill digitisation:** uses OCR to extract information from receipt images, allowing the user to review the extracted items before posting them to a khata.
+- **QR-based workflow:** generates QR codes for shopkeeper-side account interactions.
+- **Voice feedback:** supports spoken transaction-amount confirmation through an API proxy and ElevenLabs text-to-speech, with a local fallback when the external service is unavailable.
+- **Demo environment:** includes preloaded demonstration data and a reset option for testing the intended workflows.
+
+## Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend framework | React 19 |
+| Programming language | TypeScript |
+| Build tool and development server | Vite |
+| Styling | Tailwind CSS v4 |
+| UI components | Radix UI |
+| Animations and motion | Motion, Framer Motion |
+| Notifications | Sonner |
+| QR generation | `qrcode.react` |
+| QR decoding | `jsqr` |
+| OCR | Tesseract.js |
+| Backend/API functionality | API routes, including a server-side voice proxy |
+| Data integration | Supabase client and schema/migration resources; optional configuration |
+| Voice synthesis | ElevenLabs Text-to-Speech |
+| Web deployment | Vercel |
+| Android packaging | Capacitor 8 |
+
+The stack is based on the dependencies, configuration files, and technical documentation in the team's repository.
+
+## How the Application Works
+
+### 1. Shopkeeper workflow
+
+The shopkeeper can access the dashboard, work with khata-related information, create QR codes, and add bill information to a customer's account.
+
+### 2. OCR-based bill digitisation
+
+The shopkeeper can photograph or upload a receipt. Tesseract.js is used for OCR processing, after which the extracted line items can be reviewed and corrected before being posted to the khata. Manual item entry remains available when a photograph cannot be read reliably.
+
+### 3. Customer ledger
+
+The customer-facing interface presents khata information, including the running balance and settlement-related details.
+
+### 4. QR and RFID prototype workflows
+
+The application includes shopkeeper-side QR generation and a customer-side RFID prototype using Web NFC where supported, with USB RFID-wedge input as an alternative. These interactions demonstrate ways to reduce manual identification and data entry.
+
+### 5. Voice confirmation
+
+A server-side API proxy connects the application to ElevenLabs text-to-speech for spoken confirmation of a posted amount. A local fallback is available when the external voice service is not configured.
 
 ## My Contributions
 
-My contributions to E-KHATA focused on **UI/UX design, visual identity, product experience, and transaction-input workflows**, including involvement in QR scanning, OCR-based bill digitisation, and product barcode functionality.
+My primary focus was **UI/UX direction, visual identity, and user-facing workflows**, alongside contributions to QR scanning, OCR bill digitisation, and product-scanning functionality.
 
-### 1. Visual Identity & Branding
+### 1. Visual Identity and Branding
 
-- Designed the E-KHATA logo, establishing the project's visual identity.
-- Contributed to the visual direction of the website to create a recognisable and cohesive product experience.
-- Explored design resources and visual references to inform the application's styling, interactive elements, and presentation.
+- Designed the E-KHATA logo.
+- Contributed to the project's visual identity and overall design direction.
+- Helped establish a recognisable identity around trust and simplicity in digital credit management.
 
-### 2. UI/UX Design & Interaction Design
+### 2. UI/UX and Interaction Design
 
-Developed a detailed UI/UX redesign brief informed by the needs of kirana shopkeepers and customers with varying levels of digital literacy.
+- Shaped the UI/UX direction around the needs of kirana shopkeepers and customers.
+- Proposed familiar consumer-app patterns inspired by products such as Zomato, Blinkit, and Amazon rather than a conventional, complicated business dashboard.
+- Developed detailed design guidance for navigation, customer cards, search, transaction flows, and prominent balance information.
+- Emphasised mobile-friendly layouts, accessible typography, visible labels, icon-based status indicators, and clear information hierarchy.
+- Suggested simplified forms, step-by-step interactions, and clear confirmation states to reduce friction for users who may be unfamiliar with digital tools.
 
-My design direction focused on:
+### 3. OCR Bill-Digitisation Workflow
 
-- **Consumer-app-inspired interfaces:** Drawing inspiration from Zomato, Blinkit, and Amazon to make navigation and common interactions more familiar.
-- **Simplified user journeys:** Organising the experience around customer management, credit entry, bill processing, and payment tracking.
-- **Accessible design:** Emphasising readable typography, clear labels, visible icon descriptions, and straightforward language.
-- **Navigation and information hierarchy:** Specifying improvements to screen organisation, customer cards, primary actions, and transaction workflows.
-- **Transaction interactions:** Defining clearer confirmation screens, transaction-status indicators, simplified data entry, and feedback for completed actions.
-- **Mobile-friendly interaction patterns:** Exploring persistent bottom navigation, prominent action buttons, and streamlined input flows.
-- **Visual refinement and motion:** Researching design resources and animation references to guide the website's visual styling and interaction design.
+- Contributed to the workflow for converting physical receipts into digital khata entries.
+- Focused on the user journey from capturing or uploading a bill to reviewing extracted information before posting it.
+- Helped make the bill-entry process more practical and reduce repetitive manual input.
 
-### 3. OCR-Based Physical Bill Digitisation
+### 4. QR Scanning and Account Workflows
 
-Contributed to the workflow that allows shopkeepers to turn information from physical bills into digital transaction records.
+- Contributed to QR-related functionality and its integration into the user-facing workflow.
+- Focused on making scanning and account interactions intuitive within the broader khata experience.
 
-- **Physical-to-digital bill workflow:** Supported the process of photographing a physical bill and uploading the image for OCR-based information extraction.
-- **Reduced manual entry:** Helped shape the workflow for extracting bill information and using it in a digital khata transaction, reducing the need to enter every detail manually.
-- **Transaction workflow integration:** Contributed to the experience connecting bill capture, extracted information, and customer credit recording.
+### 5. Product-Scanning Workflow
 
-This functionality addresses a practical problem for local retailers: transferring information from paper bills into digital records without manually re-entering everything.
+- Contributed to the product-scanning workflow intended to reduce manual product-information entry.
+- Helped shape how scanning fits into the overall user experience.
 
-### 4. Product Barcode Scanning
+### 6. Design Research
 
-Contributed to the product barcode-scanning workflow designed to simplify transaction entry.
+I used visual and interaction references to help communicate the intended interface and experience:
 
-- **Barcode-based product input:** Contributed to the workflow through which shopkeepers scan a product barcode during transaction creation.
-- **Product identification:** Supported the flow for using a scanned barcode to identify or match the relevant product information.
-- **Khata transaction integration:** Contributed to the intended process of incorporating scanned product details into a customer's credit transaction.
-- **Reduced repetitive typing:** Helped shape a workflow designed to make product entry quicker and more convenient for shopkeepers.
+- [Anime.js](https://animejs.com/) — animation inspiration.
+- [Motion](https://motion.dev/) — interface motion and transitions.
+- [Uiverse](https://uiverse.io/) — UI component inspiration.
+- [Pexels](https://www.pexels.com/) — visual assets.
+- [SVG Backgrounds](https://www.svgbackgrounds.com/) — background design references.
+- [3Dicons](https://3dicons.co/) — icon references.
+- [Rive](https://rive.app/) — interactive animation inspiration.
 
-By combining product identification with digital credit recording, the workflow aims to reduce manual effort during everyday shop operations.
+### 7. Collaborative Development
 
-### 5. QR Scanning & Customer Transaction Workflows
+The project was developed collaboratively with my hackathon teammates. We used design references, detailed prompts, iterative feedback, and Cursor as an AI-assisted development tool during implementation.
 
-Contributed to QR-related functionality connecting shopkeepers and customers with the relevant transaction and confirmation flows.
+My main focus was shaping the user experience and visual direction, along with contributions to the QR, OCR, and product-scanning workflows.
 
-- **QR-assisted interactions:** Supported workflows that use QR codes to simplify access to customer or transaction information.
-- **Customer-facing confirmation:** Contributed to the interaction flow through which customers can access relevant bills or transaction pages and review the information presented.
-- **Connected user experience:** Considered how QR interactions fit into the broader process of recording credit, presenting transaction details, and confirming bills.
-
-Together, the OCR, barcode, and QR workflows support E-KHATA's goal of making digital credit management more practical for neighbourhood retailers.
-
-### 6. Design Research & Visual References
-
-Researched and explored design resources to guide the website's visual identity, interface styling, animations, and interactive components.
-
-Resources included:
-
-- [Anime.js](https://animejs.com/) — animation and motion references.
-- [Motion](https://motion.dev/) — interface animation and interaction patterns.
-- [Uiverse](https://uiverse.io/) — community-created UI components and styling ideas.
-- [Pexels](https://www.pexels.com/) — visual and photographic resources.
-- [SVG Backgrounds](https://www.svgbackgrounds.com/) — background patterns and visual assets.
-- [3Dicons](https://3dicons.co/) — three-dimensional icon references.
-- [Rive](https://rive.app/) — interactive graphics and animation references.
-
-These resources informed the design exploration and visual direction of the project.
-
-### 7. Collaborative Product Development
-
-E-KHATA was developed collaboratively during a hackathon using an AI-assisted development workflow with Cursor.
-
-The team worked from project requirements, reference materials, and detailed prompts to shape the application. My focus was on the visual identity, UI/UX design direction, design research, and involvement in selected QR, OCR, and barcode-related workflows.
-
----
-
-## Core Product Features
-
-- **Digital Khata:** Maintain digital records of customer credit and outstanding balances.
-- **OCR-Assisted Bill Processing:** Upload physical bill photographs for information extraction.
-- **Product Barcode Scanning:** Support barcode-based product identification during transaction entry.
-- **QR-Assisted Workflows:** Connect customers with relevant transaction and confirmation pages.
-- **Customer Access:** Allow customers to view relevant account and bill information.
-- **Settlement Tracking:** Support recording and tracking of outstanding dues.
-- **Voice Feedback:** Provide audio feedback for supported interactions.
-
-The application was demonstrated during the hackathon. Refer to the live application and team repository for the implementation and currently available functionality.
+This repository is a portfolio entry documenting my contributions. The linked team repository contains the collaborative project's implementation.
 
 ## Design Philosophy
 
-E-KHATA is built around a straightforward principle:
+**Simplicity:** prioritise common khata tasks over complex navigation.
 
-**Digitizing a familiar offline workflow should make it easier to use, not more complicated.**
+**Accessibility:** make information easy to read and actions easy to understand.
 
-For neighbourhood retailers, the interface should prioritise clarity, quick access to frequent actions, and understandable financial records. For customers, bills, balances, and transaction confirmations should be easy to review.
+**Practicality:** design around real shopkeeper and customer workflows, rather than building a purely visual prototype.
 
-The design direction emphasises:
+**Clarity:** present balances and transaction information in a way that helps users understand the state of their khata.
 
-- Familiar and recognisable interaction patterns.
-- Clear information hierarchy and readable content.
-- Simple transaction-entry and confirmation flows.
-- Reduced dependence on repetitive manual input.
-- Accessible interactions for users with varying levels of digital literacy.
+## Development and Testing
 
-## Technology & Development
+The team repository includes scripts for local development, testing, and production builds.
 
-The application was developed collaboratively using an AI-assisted development workflow.
+```bash
+npm install
+npm run dev
+npm test
+npm run build
+```
 
-For implementation details, project files, and the team's development history, refer to the shared project repository.
+The application is built with Vite and TypeScript. The repository also includes Capacitor configuration for packaging the web application as an Android application.
 
-**Team Project Repository:** [github.com/jemankalita/E-KHATA](https://github.com/jemankalita/E-KHATA)
+Some functionality, including voice synthesis and optional data integrations, depends on environment configuration. See the team repository for the implementation and setup details.
 
-## Future Roadmap
+## Future Scope
 
-### UPI Payment Integration
-Explore UPI-based payments to make repayments more convenient and simplify the settlement of outstanding balances.
+Potential future improvements include:
 
-### Dedicated Mobile Application
-Extend E-KHATA into a dedicated mobile application designed for regular use by shopkeepers and customers.
+- **UPI integration:** supporting more convenient digital payment and settlement workflows.
+- **Dedicated mobile application:** extending the experience beyond the browser-based application.
+- **Real-time synchronisation:** keeping customer and shopkeeper views aligned across devices.
+- **Reminders and overdue tracking:** helping shopkeepers follow up on outstanding balances.
+- **Offline RFID workflows:** supporting interactions when network connectivity is unavailable.
 
-### Offline-First Functionality
-Improve reliability in locations with inconsistent internet connectivity and explore safe synchronisation of transactions when connectivity returns.
-
-### Improved Synchronisation
-Enhance the consistency of transaction records across devices and improve the handling of simultaneous updates.
-
-### Reminders & Overdue Tracking
-Explore reminders and overdue-payment tracking to help shopkeepers manage outstanding credit more efficiently.
-
-*These are proposed future improvements and should not be interpreted as completed features.*
+These are future development goals and should not be interpreted as features already completed in the current prototype.
 
 ## Project Links
 
-- 🌐 **Live Application:** https://ekhata-gamma.vercel.app/
-- 💻 **Team Project Repository:** https://github.com/jemankalita/E-KHATA
+- 🌐 **Live Demo:** [E-KHATA](https://ekhata-gamma.vercel.app/)
+- 💻 **Team Project Repository:** [View source code and implementation](https://github.com/jemankalita/E-KHATA)
 
 ---
 
-*E-KHATA is a collaborative hackathon project. This portfolio entry documents my contributions to visual identity, UI/UX design direction, design research, and selected QR, OCR, and barcode-related workflows. The linked repository contains the team's project implementation.*
+*E-KHATA was developed collaboratively during a hackathon. This portfolio entry highlights my contributions to the project while linking to the team's implementation.*
